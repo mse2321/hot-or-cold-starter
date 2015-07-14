@@ -1,11 +1,13 @@
 
 $(document).ready(function(){
 	
+  var guessAttempts = 0;
+  var randomNumber = 0;
 	//On ready new game handler
 	//$(document).ready(newGame);
 
-	//new game handler
-	$(".new a").click(newGame);
+	//new game and random number generator handler
+	$("a[class='new']").click(newGame);
 
 	// user input handler
 	$("#guessButton").click(takeUserInput);
@@ -22,36 +24,50 @@ $(document).ready(function(){
   	});
 
   	function newGame() {
-		window.location.href="index.html";
+		  //window.location.href="index.html";
+      $("#numberGuessForm")[0].reset();
+      console.log("New game started!")
+      $('#count').html(0);
   	}
 
   	function randomNumberGenerator() {
-
+      randomNumber = Math.floor(Math.random() * 100);
+      console.log(randomNumber);
   	}
 
-  	function takeUserInput(guess) {
-		var guess = $('#userGuess').val();
-		console.log(guess);
-		$("#count").html(guess);
+  	function takeUserInput() {
+  		var guess = $('#userGuess').val();
+  		console.log(guess);
+
+      guessAttempts += 1;
+
+  		$("#count").html(guessAttempts);
+      rangeEvaluator(guess, randomNumber);
+
+      return false;
   	}
 
-  	function rangeEvaluator(guess) {
+    // Where we determine if the guess is close to the random number or not
+  	function rangeEvaluator(guess, randomNumber) {
+      console.log(randomNumber);
 
-  		if(guess <= guess) {
+  		if(guess < randomNumber) {
   			alert("You are getting warm.")
-  		} else if(guess <= guess) {
+  		} else if(guess <= 20) {
   			alert("You are getting warmer")
-  		} else if(guess <= guess) {
+  		} else if(guess <= 10) {
   			alert("You are red hot!")
-  		} else if(guess <= guess) {
+  		} else if(guess <= 5) {
   			alert("You are getting cold.")
-  		} else if(guess <= guess) {
+  		} else if(guess > 20 && guess <= 100) {
   			alert("You are getting colder.")
-  		} else if(guess <= guess) {
+  		} else if(guess > 10 && guess < 20) {
   			alert("You are ice cold!")
-  		}
+  		} else if(guess = randomNumber) {
+        alert("You got it right!")
+      }
   	}
-
+    randomNumberGenerator();
 });
 
 
