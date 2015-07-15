@@ -3,7 +3,7 @@ $(document).ready(function(){
 	
   var guessAttempts = 0;
   var randomNumber = 0;
-  //var guessRecord = $.makeArray();
+  var guessRecord = $.makeArray();
 
 	//new game and random number generator handler
 	$("a[class='new']").click(newGame);
@@ -24,8 +24,11 @@ $(document).ready(function(){
 
   	function newGame() {
       $("#numberGuessForm")[0].reset();
+      $("#guessList").html('');
+      $("#feedback").html("Make your Guess!")
       $('#count').html(0);
-     var guessAttempts = 0;
+
+      guessAttempts = 0;
 
       randomNumberGenerator();
   	}
@@ -48,23 +51,25 @@ $(document).ready(function(){
       guessAttempts += 1;
 
   		$("#count").html(guessAttempts);
-      rangeEvaluator(guess, randomNumber);
 
-      //recordGuesses(guess);
+      rangeEvaluator(guess, randomNumber);
+      recordGuesses(guess, guessAttempts);
 
       return false;
   	}
 
-    /*function recordGuesses(guess) { 
+
+    function recordGuesses(guess, guessAttempts) { 
+      var record = '';
       guessRecord = guess;
 
-      guessRecord.forEach(function(guessRecord){
+      $("#userGuess").each(function() {
         record += "<li>" + guessRecord + "</li>";
       });
 
-      $('#guessList').html(record);
+      $('#guessList').append(record);
 
-    }*/
+    }
 
     // Where we determine if the guess is close to the random number or not
   	function rangeEvaluator(guess, randomNumber) {
