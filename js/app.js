@@ -28,6 +28,9 @@ $(document).ready(function(){
       $("#numberGuessForm")[0].reset();
       console.log("New game started!")
       $('#count').html(0);
+      guessAttempts = 0;
+
+      randomNumberGenerator();
   	}
 
   	function randomNumberGenerator() {
@@ -51,20 +54,26 @@ $(document).ready(function(){
   	function rangeEvaluator(guess, randomNumber) {
       console.log(randomNumber);
 
-  		if(guess < randomNumber) {
-  			alert("You are getting warm.")
-  		} else if(guess <= 20) {
-  			alert("You are getting warmer")
-  		} else if(guess <= 10) {
+      var numberDifference = randomNumber - guess;
+
+  		if(numberDifference == 0) {
+  			alert("You got it!")
+  		} else if(numberDifference <= 5) {
   			alert("You are red hot!")
-  		} else if(guess <= 5) {
+  		} else if(numberDifference < 10) {
+  			alert("You are getting warmer")
+      } else if(numberDifference <= 20) {
+        alert("You are getting warm.")
+      } else if(numberDifference == 50) {
+        alert("You are neutral.")
+  		} else if(numberDifference > 50 && numberDifference <= 60) {
   			alert("You are getting cold.")
-  		} else if(guess > 20 && guess <= 100) {
+  		} else if(numberDifference >= 70 && numberDifference <= 80) {
   			alert("You are getting colder.")
-  		} else if(guess > 10 && guess < 20) {
+  		} else if(numberDifference >= 90 && numberDifference <= 100) {
   			alert("You are ice cold!")
-  		} else if(guess = randomNumber) {
-        alert("You got it right!")
+      } else {
+        alert("You guess is way off!")
       }
   	}
     randomNumberGenerator();
