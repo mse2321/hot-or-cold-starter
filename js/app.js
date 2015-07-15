@@ -3,8 +3,7 @@ $(document).ready(function(){
 	
   var guessAttempts = 0;
   var randomNumber = 0;
-	//On ready new game handler
-	//$(document).ready(newGame);
+  //var guessRecord = $.makeArray();
 
 	//new game and random number generator handler
 	$("a[class='new']").click(newGame);
@@ -24,59 +23,75 @@ $(document).ready(function(){
   	});
 
   	function newGame() {
-		  //window.location.href="index.html";
       $("#numberGuessForm")[0].reset();
-      console.log("New game started!")
       $('#count').html(0);
-      guessAttempts = 0;
+     var guessAttempts = 0;
 
       randomNumberGenerator();
   	}
 
   	function randomNumberGenerator() {
       randomNumber = Math.floor(Math.random() * 100);
-      console.log(randomNumber);
   	}
 
   	function takeUserInput() {
   		var guess = $('#userGuess').val();
-  		console.log(guess);
+
+      if(guess == '') {
+        $("#feedback").html("Please Enter a Number!");
+        return false;
+      } else if (guess > 100) {
+        $("#feedback").html("Please Enter a Number between 1 and 100!");
+        return false;
+      }
 
       guessAttempts += 1;
 
   		$("#count").html(guessAttempts);
       rangeEvaluator(guess, randomNumber);
 
+      //recordGuesses(guess);
+
       return false;
   	}
 
+    /*function recordGuesses(guess) { 
+      guessRecord = guess;
+
+      guessRecord.forEach(function(guessRecord){
+        record += "<li>" + guessRecord + "</li>";
+      });
+
+      $('#guessList').html(record);
+
+    }*/
+
     // Where we determine if the guess is close to the random number or not
   	function rangeEvaluator(guess, randomNumber) {
-      console.log(randomNumber);
 
-      var numberDifference = randomNumber - guess;
+      var numberDifference = Math.abs(randomNumber - guess);
 
   		if(numberDifference == 0) {
-  			alert("You got it!")
-  		} else if(numberDifference <= 5) {
-  			alert("You are red hot!")
-  		} else if(numberDifference < 10) {
-  			alert("You are getting warmer")
-      } else if(numberDifference <= 20) {
-        alert("You are getting warm.")
-      } else if(numberDifference == 50) {
-        alert("You are neutral.")
-  		} else if(numberDifference > 50 && numberDifference <= 60) {
-  			alert("You are getting cold.")
-  		} else if(numberDifference >= 70 && numberDifference <= 80) {
-  			alert("You are getting colder.")
-  		} else if(numberDifference >= 90 && numberDifference <= 100) {
-  			alert("You are ice cold!")
-      } else {
-        alert("You guess is way off!")
+    			$("#feedback").html("You got it!");
+    		} else if(numberDifference < 5) {
+    			$("#feedback").html("You are red hot!");
+    		} else if(numberDifference >= 5 && numberDifference < 10) {
+    			$("#feedback").html("You are getting warmer");
+        } else if(numberDifference >= 10 && numberDifference < 50) {
+          $("#feedback").html("You are getting warm.");
+        } else if(numberDifference == 50) {
+          $("#feedback").html("You are neutral.");
+    		} else if(numberDifference > 50 && numberDifference <= 60) {
+    			$("#feedback").html("You are getting cold.");
+    		} else if(numberDifference >= 70 && numberDifference <= 80) {
+    			$("#feedback").html("You are getting colder.");
+    		} else if(numberDifference >= 90 && numberDifference <= 100) {
+    			$("#feedback").html("You are ice cold!");
+        } else {
+          $("#feedback").html("You guess is way off!");
+        }
       }
-  	}
-    randomNumberGenerator();
+      randomNumberGenerator();
 });
 
 
