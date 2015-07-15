@@ -77,23 +77,29 @@ $(document).ready(function(){
       var numberDifference = Math.abs(randomNumber - guess);
 
   		if(numberDifference == 0) {
-    			$("#feedback").html("You got it!");
+    			  $("#feedback").html("You got it!");
     		} else if(numberDifference < 5) {
-    			$("#feedback").html("You are red hot!");
+    			  $("#feedback").html("You are red hot!");
     		} else if(numberDifference >= 5 && numberDifference < 10) {
-    			$("#feedback").html("You are getting warmer");
-        } else if(numberDifference >= 10 && numberDifference < 50) {
-          $("#feedback").html("You are getting warm.");
+    			  $("#feedback").html("You are getting much warmer");
+        } else if(numberDifference >= 10 && numberDifference < 20) {
+            $("#feedback").html("You are getting warmer.");
+        } else if(numberDifference >= 20 && numberDifference < 30) {
+            $("#feedback").html("You are getting a bit warmer.");
+        } else if(numberDifference >= 30 && numberDifference < 40) {
+            $("#feedback").html("You are getting warm");
+        } else if(numberDifference >= 40 && numberDifference < 50) {
+            $("#feedback").html("You are getting sort of warm.");
         } else if(numberDifference == 50) {
-          $("#feedback").html("You are neutral.");
+            $("#feedback").html("You are neutral.");
     		} else if(numberDifference > 50 && numberDifference <= 60) {
-    			$("#feedback").html("You are getting cold.");
+    			  $("#feedback").html("You are getting cold.");
     		} else if(numberDifference >= 70 && numberDifference <= 80) {
-    			$("#feedback").html("You are getting colder.");
+    			  $("#feedback").html("You are getting colder.");
     		} else if(numberDifference >= 90 && numberDifference <= 100) {
-    			$("#feedback").html("You are ice cold!");
+    			  $("#feedback").html("You are ice cold!");
         } else {
-          $("#feedback").html("You guess is way off!");
+            $("#feedback").html("You guess is way off!");
         }
       }
       randomNumberGenerator();
