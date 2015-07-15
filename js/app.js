@@ -64,7 +64,7 @@ $(document).ready(function(){
       guessRecord = guess;
 
       $("#userGuess").each(function() {
-        record += "<li>" + guessRecord + "</li>";
+        record += "<li>Guess #" + guessAttempts + " = " + guessRecord + "</li><br />";
       });
 
       $('#guessList').append(record);
